@@ -15,7 +15,7 @@
       align-items: center;
       margin: 0;
       padding: 16px;
-      background-color: transparent; /* Se integra al fondo del sitio contenedor */
+      background-color: transparent;
       min-height: 100%;
     }
     .container {
@@ -92,8 +92,8 @@
     const codigoUnico = generarTicketPorFecha();
     document.getElementById("ticketDisplay").innerText = codigoUnico;
 
-    // URL base de tu Microsoft Forms (reemplaza &rXXXXXXXX= con tu parámetro real)
-    const urlBase = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=gj06REJDpkCRvL9uVdymr8zLdYT5_JdGoPCm5j_ODZdURFJNOFA3WE9GTFRQMk5ZQkZTUkFGRzBCNi4u&rXXXXXXXX=";
+    // URL con tu parámetro real integrado
+    const urlBase = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=gj06REJDpkCRvL9uVdymr8zLdYT5_JdGoPCm5j_ODZdURFJNOFA3WE9GTFRQMk5ZQkZTUkFGRzBCNi4u&r463483d881ed49adb182d3402944104d=";
     const urlFinal = urlBase + encodeURIComponent(codigoUnico);
 
     document.getElementById("btnSoporte").addEventListener("click", function() {
