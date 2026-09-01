@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Gestión de Soporte Técnico</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f4f9;
+    }
+    .container {
+      text-align: center;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      max-width: 420px;
+      width: 90%;
+    }
+    h2 { color: #1f1f1f; margin-top: 0; font-size: 22px; }
+    p { color: #5f6368; font-size: 15px; margin-bottom: 25px; line-height: 1.4; }
+    .ticket-box {
+      background-color: #f1f3f4;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #0078d4;
+      margin-bottom: 25px;
+      letter-spacing: 1.5px;
+      border: 1px dashed #0078d4;
+    }
+    .btn {
+      background-color: #0078d4;
+      color: white;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 24px;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+      display: inline-block;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .btn:hover { background-color: #005a9e; }
+    .btn:active { transform: scale(0.98); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Reportar Caso a Soporte</h2>
+    <p>Se ha generado el siguiente identificador automático para tu solicitud:</p>
+    <div class="ticket-box" id="ticketDisplay">Generando...</div>
+    <button id="btnSoporte" class="btn">Ir al Formulario de Soporte</button>
+  </div>
+
+  <script>
+    // Generador de folio consecutivo basado en Fecha y Hora
+    function generarTicketPorFecha() {
+      const ahora = new Date();
+      
+      const anio = String(ahora.getFullYear()).slice(-2); // Últimos 2 dígitos del año (ej: 26)
+      const mes = String(ahora.getMonth() + 1).padStart(2, '0'); // Mes (ej: 09)
+      const dia = String(ahora.getDate()).padStart(2, '0'); // Día (ej: 01)
+      
+      const horas = String(ahora.getHours()).padStart(2, '0'); // Hora (ej: 07)
+      const minutos = String(ahora.getMinutes()).padStart(2, '0'); // Minutos (ej: 15)
+      const segundos = String(ahora.getSeconds()).padStart(2, '0'); // Segundos (ej: 22)
+      
+      // Estructura: CS-AAMMDD-HHMMSS (Ejemplo: CS-260901-071522)
+      return `CS-${anio}${mes}${dia}-${horas}${minutos}${segundos}`;
+    }
+
+    const codigoUnico = generarTicketPorFecha();
+    document.getElementById("ticketDisplay").innerText = codigoUnico;
+
+    // URL base de tu formulario de Microsoft Forms
+    // Recuerda reemplazar '&rXXXXXXXX=' con el parámetro de tu pregunta pre-rellenada
+    const urlBase = "https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=gj06REJDpkCRvL9uVdymr8zLdYT5_JdGoPCm5j_ODZdURFJNOFA3WE9GTFRQMk5ZQkZTUkFGRzBCNi4u&rXXXXXXXX=";
+
+    const urlFinal = urlBase + encodeURIComponent(codigoUnico);
+
+    document.getElementById("btnSoporte").addEventListener("click", function() {
+      window.open(urlFinal, "_blank");
+    });
+  </script>
+</body>
+</html>
